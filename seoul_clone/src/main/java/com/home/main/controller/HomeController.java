@@ -29,7 +29,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value="main.do",method=RequestMethod.GET)
+	@RequestMapping(value="/main/",method=RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		logger.info("WebStart! {} ",locale);
@@ -37,11 +37,17 @@ public class HomeController {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
-		
+		System.out.println("main.do");
 		model.addAttribute("serverTime", formattedDate );
 		model.addAttribute("curmonth",calendardao.getCal().getCurmonth());
 		model.addAttribute("months",calendardao.getCal().getMonths());
 		
 		return "WEB-INF/main/main";
+	}
+	
+	@RequestMapping("main.do")
+	public String main(){
+		
+		return "WEB-INF/main/home";
 	}
 }
